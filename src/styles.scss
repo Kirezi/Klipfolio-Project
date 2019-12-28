@@ -17,6 +17,8 @@ $Klipfolio-project-accent: mat-palette($mat-pink, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $Klipfolio-project-warn: mat-palette($mat-red);
 
+// background color
+$Klipfolio-project-bg: #eeeeee;
 // Create the theme object (a Sass map containing all of the palettes).
 $Klipfolio-project-theme: mat-light-theme(
     $Klipfolio-project-primary,
@@ -34,7 +36,9 @@ $Klipfolio-project-theme: mat-light-theme(
 html,
 body {
     height: 100%;
+    background-color: $Klipfolio-project-bg;
 }
+
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
