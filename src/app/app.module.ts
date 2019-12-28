@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { GalleryComponent } from './pages/gallery/gallery.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, GalleryComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
