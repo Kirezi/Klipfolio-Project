@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "klipfolio-project-81de1": {
+      "hosting": {
+        "Klipfolio-project": [
+          "klipfolio-project-81de1"
+        ]
+      }
+    }
+  }
+}

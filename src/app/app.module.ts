@@ -9,7 +9,9 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
 import { ServiceComponent } from './components/service/service.component';
 import { MetricComponent } from './components/metric/metric.component';
 import { ModelledDataComponent } from './components/modelled-data/modelled-data.component';
-
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,7 +24,9 @@ import { ModelledDataComponent } from './components/modelled-data/modelled-data.
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        SharedModule
+        SharedModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule
     ],
     providers: [],
     bootstrap: [AppComponent]

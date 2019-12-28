@@ -113,6 +113,10 @@
                             "devServerTarget": "Klipfolio-project:serve:production"
                         }
                     }
+                },
+                "deploy": {
+                    "builder": "@angular/fire:deploy",
+                    "options": {}
                 }
             }
         }
