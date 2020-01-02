@@ -18,4 +18,10 @@ export class ApiService {
             .collection<Service>('service')
             .valueChanges({ idField: 'id' });
     }
+
+    getModelledData(id: string) {
+        return this.db
+            .collection('modelled-data')
+            .valueChanges({ idField: 'id' });
+    }
 }

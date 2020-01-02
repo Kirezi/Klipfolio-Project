@@ -1,1 +1,6 @@
-<p>service works!</p>
+<div class="container">
+    <label class="text-center">{{ service.serviceName }}</label>
+    <mat-card (click)="onServiceClicked()">
+        <img [src]="service.imageUrl" class="img-fluid" />
+    </mat-card>
+</div>

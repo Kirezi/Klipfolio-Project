@@ -1,5 +1,5 @@
 export interface Service {
     id?: string;
-    name?: string;
+    serviceName?: string;
     imageUrl?: string;
 }

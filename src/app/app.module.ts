@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 @NgModule({
     declarations: [AppComponent, GalleryComponent],
     imports: [
@@ -19,9 +20,11 @@ import { ComponentsModule } from './components/components.module';
         SharedModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
-        ComponentsModule
+        ComponentsModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule
     ],
-    providers: [],
+    providers: [{ provide: StorageBucket, useValue: 'image-bucket' }],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

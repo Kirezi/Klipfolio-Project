@@ -13,7 +13,14 @@
             <h6>Recommended services</h6>
         </div>
         <div class="col-12">
-            <app-service></app-service>
+            <div class="row mt-3">
+                <div class="col-2" *ngFor="let service of services">
+                    <app-service
+                        [service]="service"
+                        (serviceClicked)="fetchModelledDatas($event)"
+                    ></app-service>
+                </div>
+            </div>
         </div>
     </div>
 
