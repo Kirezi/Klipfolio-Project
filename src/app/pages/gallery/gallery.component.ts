@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { Service } from 'src/app/model/service.model';
+import { Service, ModelData, Metric } from 'src/app/model/service.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
@@ -10,6 +10,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class GalleryComponent implements OnInit {
     services: Service[];
+    modelData: ModelData[];
+    metrics: Metric[];
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
@@ -26,11 +28,21 @@ export class GalleryComponent implements OnInit {
     }
 
     fetchModelledDatas(serviceId: string) {
-        this.apiService.getModelledData().subscribe(result => {
+        this.apiService.getModelledData(serviceId).subscribe(result => {
             if (result) {
+                this.modelData = result;
                 console.log('modelled data', result);
             }
         });
         console.log(serviceId);
+    }
+
+    fetchMetricData(serviceId: string) {
+        this.apiService.getMetricData(serviceId).subscribe(result => {
+            if (result) {
+                this.metrics = result;
+                console.log(this.metrics);
+            }
+        });
     }
 }

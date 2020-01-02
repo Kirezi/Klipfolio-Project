@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Metric } from 'src/app/model/service.model';
 
 @Component({
     selector: 'app-metric',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./metric.component.scss']
 })
 export class MetricComponent implements OnInit {
+    @Input() metric: Metric;
     constructor() {}
 
     ngOnInit() {}

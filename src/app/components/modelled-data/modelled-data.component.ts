@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-modelled-data',
@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./modelled-data.component.scss']
 })
 export class ModelledDataComponent implements OnInit {
+    @Input() title: string;
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log(this.title);
+    }
 }

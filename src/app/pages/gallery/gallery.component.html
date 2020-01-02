@@ -4,7 +4,11 @@
             <h6>Recommended Metrics</h6>
         </div>
         <div class="col-12">
-            <app-metric></app-metric>
+            <div class="row">
+                <div class="col-3" *ngFor="let metric of metrics">
+                    <app-metric [metric]="metric"></app-metric>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -18,6 +22,7 @@
                     <app-service
                         [service]="service"
                         (serviceClicked)="fetchModelledDatas($event)"
+                        (serviceClicked)="fetchMetricData($event)"
                     ></app-service>
                 </div>
             </div>
@@ -29,7 +34,11 @@
             <h6>Existing modelled data</h6>
         </div>
         <div class="col-12">
-            <app-modelled-data></app-modelled-data>
+            <div class="row">
+                <div class="col-3 mt-3" *ngFor="let data of modelData">
+                    <app-modelled-data [title]="data.title"></app-modelled-data>
+                </div>
+            </div>
         </div>
     </div>
 </div>
