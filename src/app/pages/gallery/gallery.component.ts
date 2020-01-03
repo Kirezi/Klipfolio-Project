@@ -12,12 +12,23 @@ export class GalleryComponent implements OnInit {
     services: Service[];
     modelData: ModelData[];
     metrics: Metric[];
+    sub:Subcription;
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
         this.fetchServices();
     }
 
+    /**
+     * unsubscribe to the api 
+     */
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+      }
+
+      /**
+       * retrieve all services 
+       */
     fetchServices() {
         this.apiService.getServices().subscribe(result => {
             if (result) {
@@ -27,6 +38,11 @@ export class GalleryComponent implements OnInit {
         });
     }
 
+    /**
+     * retrieve modelled data 
+     * based on the service id
+     * @param serviceId
+     */
     fetchModelledDatas(serviceId: string) {
         this.apiService.getModelledData(serviceId).subscribe(result => {
             if (result) {
@@ -37,6 +53,11 @@ export class GalleryComponent implements OnInit {
         console.log(serviceId);
     }
 
+    /**
+     * retrieve Metric data 
+     * based on the service id
+     * @param serviceId
+     */
     fetchMetricData(serviceId: string) {
         this.apiService.getMetricData(serviceId).subscribe(result => {
             if (result) {
