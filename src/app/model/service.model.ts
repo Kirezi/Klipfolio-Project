@@ -15,5 +15,5 @@ export interface Metric {
 
 export interface data {
     count: number;
-    updatedAt: string;
+    updatedAt: any;
 }

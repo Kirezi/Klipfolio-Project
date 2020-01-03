@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Metric } from 'src/app/model/service.model';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-
+import * as moment from 'moment';
 @Component({
     selector: 'app-metric',
     templateUrl: './metric.component.html',
@@ -11,24 +11,10 @@ import { Color, Label } from 'ng2-charts';
 export class MetricComponent implements OnInit {
     @Input() metric: Metric;
     indexOfLastElement: number;
-   
-    initChart(){
-      for(int i =0; i<metric.data.length; i++){
-        
-      }
-    }
-    lineChartData: ChartDataSets[] = [
-        { data: [85, 72, 78, 75, 77, 75], label: 'metric' }
-    ];
-
-    lineChartLabels: Label[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June'
-    ];
+    countArray: number[] = [];
+    metricDate: string[] = [];
+    lineChartData: ChartDataSets[];
+    lineChartLabels: Label[]; 
 
     lineChartOptions = {
         responsive: true,
@@ -69,5 +55,23 @@ export class MetricComponent implements OnInit {
 
     ngOnInit() {
         this.indexOfLastElement = this.metric.data.length - 1;
+        this.getChartData();
+        this.initChart();
+    }
+
+    getChartData() {
+        for (let i = 0; i < this.metric.data.length; i++) {
+            this.countArray[i] = this.metric.data[i].count;
+            this.metricDate[i] = moment
+                .utc(this.metric.data[i].updatedAt.seconds * 1000)
+                .format('D MMMM YYYY');
+        }
+    }
+
+    initChart(){
+     this.lineChartData = [
+        { data: this.countArray, label: 'metric' }
+    ];
+    this.lineChartLabels = this.metricDate;
     }
 }
