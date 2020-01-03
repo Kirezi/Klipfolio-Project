@@ -1,19 +1,44 @@
 <mat-card>
     <mat-card-content>
-        <h6>
-            <label>{{ metric.title }}</label>
+        <h6 class="m-0">
+            <label class="m-0">{{ metric.title }}</label>
         </h6>
-        <div class="row">
-            <div class="col-6">
-                <strong><sup>$</sup> {{ metric.count }}</strong>
+        <div class="flex-row-reverse m-0">
+            <label class="percentage m-0 mr-5">
+                <strong>
+                    <mat-icon aria-hidden="false" aria-label="arrow_upward icon"
+                        >arrow_upward
+                    </mat-icon>
+                    <span>7%</span>
+                </strong>
+            </label>
+        </div>
+        <div class="flex-container">
+            <div class="mr-4">
+                <strong
+                    ><sup>$</sup>
+                    {{ (metric?.data)[indexOfLastElement].count }}</strong
+                >
             </div>
-            <div class="col-6">
-                <div class="row no-gutters">
-                    <label class="col-12 percentage">7%</label>
-                    <label class="col-12 text-muted daylabel"
-                        >vs previous 14 days</label
-                    >
-                </div>
+
+            <div class="flex-column">
+                <label class="text-muted daylabel">vs previous 14 days</label>
+            </div>
+        </div>
+
+        <div class="flex-fill">
+            <div class="chart-wrapper">
+                <canvas
+                    baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins"
+                >
+                </canvas>
             </div>
         </div>
     </mat-card-content>

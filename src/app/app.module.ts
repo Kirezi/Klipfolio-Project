@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
     declarations: [AppComponent, GalleryComponent],
     imports: [
@@ -22,7 +23,8 @@ import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
         AngularFirestoreModule,
         ComponentsModule,
         AngularFirestoreModule,
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        ChartsModule
     ],
     providers: [{ provide: StorageBucket, useValue: 'image-bucket' }],
     bootstrap: [AppComponent]

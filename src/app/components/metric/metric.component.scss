@@ -3,5 +3,25 @@
 }
 
 .daylabel {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+}
+
+mat-icon {
+    font-size: 0.8rem;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }

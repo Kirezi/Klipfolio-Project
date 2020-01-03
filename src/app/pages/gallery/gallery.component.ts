@@ -41,7 +41,7 @@ export class GalleryComponent implements OnInit {
         this.apiService.getMetricData(serviceId).subscribe(result => {
             if (result) {
                 this.metrics = result;
-                console.log(this.metrics);
+                console.log('metrics', this.metrics);
             }
         });
     }
