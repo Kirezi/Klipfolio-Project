@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 const components = [HeaderComponent];
 const modules = [
     CommonModule,
@@ -18,7 +19,7 @@ const modules = [
     MatCardModule
 ];
 @NgModule({
-    declarations: [...components],
+    declarations: [...components, LoadingSpinnerComponent],
     imports: [...modules],
     exports: [...components, ...modules]
 })

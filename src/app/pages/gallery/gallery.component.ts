@@ -16,6 +16,7 @@ export class GalleryComponent implements OnInit {
     modelData: ModelData[];
     metrics: Metric[];
     sub: Subscription;
+    servicePageSize = 6;
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
@@ -32,8 +33,8 @@ export class GalleryComponent implements OnInit {
     /**
      * retrieve all services
      */
-    fetchServices() {
-        this.apiService.getServices().subscribe(result => {
+    fetchServices(pageSize?) {
+        this.apiService.getServices(pageSize).subscribe(result => {
             if (result) {
                 console.log('services', result);
                 this.services = result;
@@ -70,5 +71,13 @@ export class GalleryComponent implements OnInit {
                 console.log('metrics', this.metrics);
             }
         });
+    }
+
+    moreContent() {
+        this.servicePageSize = this.servicePageSize + 6;
+
+        console.log(this.servicePageSize);
+
+        this.fetchServices(this.servicePageSize);
     }
 }
