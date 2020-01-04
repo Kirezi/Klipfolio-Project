@@ -17,9 +17,13 @@ export class GalleryComponent implements OnInit {
     metrics: Metric[];
     sub: Subscription;
     servicePageSize = 6;
+    showServiceSpinner: boolean;
+    showMetricSpinner: boolean;
+    showModelSpinner: boolean;
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
+        this.showServiceSpinner = true;
         this.fetchServices();
     }
 
@@ -38,6 +42,7 @@ export class GalleryComponent implements OnInit {
             if (result) {
                 console.log('services', result);
                 this.services = result;
+                this.showServiceSpinner = false;
             } else {
                 console.log('the data you are tring to access dont exist');
             }
@@ -50,10 +55,12 @@ export class GalleryComponent implements OnInit {
      * @param serviceId
      */
     fetchModelledDatas(serviceId: string) {
+        this.showModelSpinner = true;
         this.apiService.getModelledData(serviceId).subscribe(result => {
             if (result) {
                 this.modelData = result;
                 console.log('modelled data', result);
+                this.showModelSpinner = false;
             }
         });
         console.log(serviceId);
@@ -65,9 +72,11 @@ export class GalleryComponent implements OnInit {
      * @param serviceId
      */
     fetchMetricData(serviceId: string) {
+        this.showMetricSpinner = true;
         this.apiService.getMetricData(serviceId).subscribe(result => {
             if (result) {
                 this.metrics = result;
+                this.showMetricSpinner = false;
                 console.log('metrics', this.metrics);
             }
         });
@@ -77,7 +86,7 @@ export class GalleryComponent implements OnInit {
         this.servicePageSize = this.servicePageSize + 6;
 
         console.log(this.servicePageSize);
-
+        this.showServiceSpinner = true;
         this.fetchServices(this.servicePageSize);
     }
 }

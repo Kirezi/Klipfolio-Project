@@ -16,7 +16,13 @@
     <div class="col-12">
       <h6>Recommended services</h6>
     </div>
-    <div class="col-12">
+    <div class="col-12 justify-content" *ngIf="showServiceSpinner">
+      <div class="centerblock text-center">
+        <loading-spinner class="text-center"></loading-spinner>
+      </div>
+
+    </div>
+    <div class="col-12" *ngIf="!showServiceSpinner">
       <div class="row mt-3">
         <div class="col-sm-12 col-md-2 mb-5" *ngFor="let service of services">
           <app-service [service]="service" (serviceClicked)="fetchModelledDatas($event)"
@@ -37,9 +43,12 @@
     <div class="col-12">
       <h6>Existing modelled data</h6>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="showModelSpinner">
+      <loading-spinner></loading-spinner>
+    </div>
+    <div class="col-12" *ngIf="!showModelSpinner">
       <div class="row">
-        <div class="col-3 mt-3" *ngFor="let data of modelData">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-3" *ngFor="let data of modelData">
           <app-modelled-data [title]="data.title"></app-modelled-data>
         </div>
       </div>

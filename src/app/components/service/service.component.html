@@ -1,6 +1,9 @@
 <div class="container">
   <label class="text-center">{{ service.serviceName }}</label>
   <mat-card (click)="onServiceClicked()" matRipple>
-    <img [src]="service?.imageUrl" class="img-fluid" />
+
+    <loading-spinner class="text-center" *ngIf="showSpinner"></loading-spinner>
+
+    <img [src]="service?.imageUrl" *ngIf="!showSpinner" class="img-fluid" />
   </mat-card>
 </div>
