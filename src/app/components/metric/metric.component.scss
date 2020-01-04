@@ -1,27 +1,34 @@
+@import'../../../variable-style.scss';
+
 .percentage {
-    color: palegreen;
+  color: $metric-percentage;
 }
 
 .daylabel {
-    font-size: 0.7rem;
+  font-size: 0.7rem;
 }
 
 mat-icon {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .flex-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .flex-row-reverse {
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card {
+  min-width: 100px;
+  min-height: 150px;
 }

@@ -1,9 +1,17 @@
 <div class="container">
-  <label class="text-center">{{ service.serviceName }}</label>
-  <mat-card (click)="onServiceClicked()" matRipple>
+  <div class="row">
+    <div class="col-12">
+      <label>{{ service.serviceName }}</label>
+    </div>
+    <div class="col-12">
+      <mat-card (click)="onServiceClicked()" matRipple>
 
-    <loading-spinner class="text-center" *ngIf="showSpinner"></loading-spinner>
+        <loading-spinner class="text-center" *ngIf="showSpinner"></loading-spinner>
 
-    <img [src]="service?.imageUrl" *ngIf="!showSpinner" class="img-fluid" />
-  </mat-card>
+        <img [src]="service?.imageUrl" *ngIf="!showSpinner" class="img-fluid" />
+      </mat-card>
+    </div>
+  </div>
+
+
 </div>

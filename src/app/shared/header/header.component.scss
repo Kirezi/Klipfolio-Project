@@ -1,41 +1,60 @@
-.input-group-overlay {
-    position: relative;
-    width: 50%;
-    left: 100px;
+/*
+*header search style
+*/
+
+
+
+.input-group-append-overlay {
+  right: 0;
 }
 
 .input-group-append-overlay {
-    right: 0;
-}
-
-.input-group-append-overlay {
-    display: flex;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    z-index: 5;
+  display: flex;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 5;
 }
 
 .input-group-append-overlay .input-group-text {
-    border: 0;
-    background-color: transparent;
+  border: 0;
+  background-color: transparent;
 }
 
 .input-group-text {
-    padding: 0.625rem 0.4rem;
+  padding: 0.625rem 0.4rem;
 }
 
 .form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 1.25rem + 2px);
-    padding: 0.625rem 1rem;
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: 1.5;
-    background-clip: padding-box;
-    border: 1px solid #dae1e7;
-    border-radius: 0.3125rem;
-    box-shadow: 0 0 0 0 transparent;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 1.25rem + 2px);
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+  border: 1px solid #dae1e7;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0 0 0 transparent;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/*
+*responsivness for the tablet and desktop mode
+*/
+@media (min-width: 768px) {
+  .input-group-overlay {
+    position: relative;
+    width: 50%;
+    left: -100px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .input-group-overlay {
+    position: relative;
+    width: 50%;
+    left: 20%;
+  }
 }

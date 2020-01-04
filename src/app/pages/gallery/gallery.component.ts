@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Service } from 'src/app/model/service.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 import { ModelData } from 'src/app/model/modelData.model';
 import { Metric } from 'src/app/model/metric.model';
+import { PaginationService } from 'src/app/service/pagination.service';
 
 @Component({
     selector: 'app-gallery',
@@ -20,7 +21,10 @@ export class GalleryComponent implements OnInit {
     showServiceSpinner: boolean;
     showMetricSpinner: boolean;
     showModelSpinner: boolean;
-    constructor(private apiService: ApiService) {}
+    constructor(
+        private apiService: ApiService,
+        private paginationService: PaginationService
+    ) {}
 
     ngOnInit() {
         this.showServiceSpinner = true;
@@ -37,11 +41,14 @@ export class GalleryComponent implements OnInit {
     /**
      * retrieve all services
      */
-    fetchServices(pageSize?) {
-        this.apiService.getServices(pageSize).subscribe(result => {
+    fetchServices(docId?) {
+        console.log('fetchservice', docId);
+        this.apiService.getServices(docId).subscribe(result => {
             if (result) {
                 console.log('services', result);
+
                 this.services = result;
+
                 this.showServiceSpinner = false;
             } else {
                 console.log('the data you are tring to access dont exist');
@@ -83,10 +90,7 @@ export class GalleryComponent implements OnInit {
     }
 
     moreContent() {
-        this.servicePageSize = this.servicePageSize + 6;
-
-        console.log(this.servicePageSize);
-        this.showServiceSpinner = true;
-        this.fetchServices(this.servicePageSize);
+        console.log('from pagination', this.services[this.services.length - 1]);
+        this.fetchServices(this.services[this.services.length - 1].serviceName);
     }
 }

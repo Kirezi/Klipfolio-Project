@@ -15,15 +15,18 @@ import { Metric } from '../model/metric.model';
 export class ApiService {
     constructor(private db: AngularFirestore) {}
 
-    getServices(pageSize?) {
-        if (!pageSize) {
-            pageSize = 6;
-        }
-        return this.db
-            .collection<Service>('service', qfn =>
-                qfn.orderBy('serviceName').limit(pageSize)
+    getServices(docId = null) {
+        let serviceRef;
+        serviceRef = this.db
+            .collection('service', qfn =>
+                qfn
+                    .orderBy('serviceName')
+                    .startAfter(docId)
+                    .limit(6)
             )
             .valueChanges({ idField: 'id' });
+
+        return serviceRef;
     }
 
     getModelledData(id: string) {

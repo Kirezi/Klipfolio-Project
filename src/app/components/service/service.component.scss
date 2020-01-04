@@ -3,11 +3,14 @@ mat-card {
   max-height: 80px;
   max-width: 80px;
   cursor: pointer;
-
-
 }
 
 .image-responsive {
   width: 100%;
   height: auto;
+}
+
+label {
+  display: block;
+  width: 200px;
 }
