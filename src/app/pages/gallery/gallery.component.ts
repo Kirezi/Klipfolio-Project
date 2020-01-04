@@ -35,6 +35,8 @@ export class GalleryComponent implements OnInit {
             if (result) {
                 console.log('services', result);
                 this.services = result;
+            } else {
+              console.log('the data you are tring to access dont exist');
             }
         });
     }
