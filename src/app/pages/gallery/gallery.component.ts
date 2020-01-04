@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { Service, ModelData, Metric } from 'src/app/model/service.model';
+import { Service } from 'src/app/model/service.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
+import { ModelData } from 'src/app/model/modelData.model';
+import { Metric } from 'src/app/model/metric.model';
 
 @Component({
     selector: 'app-gallery',
@@ -21,28 +23,28 @@ export class GalleryComponent implements OnInit {
     }
 
     /**
-     * unsubscribe to the api 
+     * unsubscribe to the api
      */
     ngOnDestroy() {
         this.sub.unsubscribe();
-      }
+    }
 
-      /**
-       * retrieve all services 
-       */
+    /**
+     * retrieve all services
+     */
     fetchServices() {
         this.apiService.getServices().subscribe(result => {
             if (result) {
                 console.log('services', result);
                 this.services = result;
             } else {
-              console.log('the data you are tring to access dont exist');
+                console.log('the data you are tring to access dont exist');
             }
         });
     }
 
     /**
-     * retrieve modelled data 
+     * retrieve modelled data
      * based on the service id
      * @param serviceId
      */
@@ -57,7 +59,7 @@ export class GalleryComponent implements OnInit {
     }
 
     /**
-     * retrieve Metric data 
+     * retrieve Metric data
      * based on the service id
      * @param serviceId
      */

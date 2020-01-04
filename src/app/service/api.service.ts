@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Service, ModelData, Metric } from '../model/service.model';
+import { Service } from '../model/service.model';
+import { ModelData } from '../model/modelData.model';
+import { Metric } from '../model/metric.model';
 /**
  *
  *

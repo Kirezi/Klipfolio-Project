@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Metric } from 'src/app/model/service.model';
+
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as moment from 'moment';
+import { Metric } from 'src/app/model/metric.model';
 @Component({
     selector: 'app-metric',
     templateUrl: './metric.component.html',
@@ -14,7 +15,7 @@ export class MetricComponent implements OnInit {
     countArray: number[] = [];
     metricDate: string[] = [];
     lineChartData: ChartDataSets[];
-    lineChartLabels: Label[]; 
+    lineChartLabels: Label[];
 
     lineChartOptions = {
         responsive: true,
@@ -68,10 +69,8 @@ export class MetricComponent implements OnInit {
         }
     }
 
-    initChart(){
-     this.lineChartData = [
-        { data: this.countArray, label: 'metric' }
-    ];
-    this.lineChartLabels = this.metricDate;
+    initChart() {
+        this.lineChartData = [{ data: this.countArray, label: 'metric' }];
+        this.lineChartLabels = this.metricDate;
     }
 }
