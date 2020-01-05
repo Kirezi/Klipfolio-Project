@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GalleryComponent } from './gallery.component';
 import { Component, NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({ selector: 'app-metric', template: '' })
 class MetricComponent {}

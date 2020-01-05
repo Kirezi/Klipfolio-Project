@@ -1,17 +1,9 @@
-import {
-    Component,
-    OnInit,
-    ɵConsole,
-    OnDestroy,
-    AfterViewInit
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Service } from 'src/app/model/service.model';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 import { ModelData } from 'src/app/model/modelData.model';
 import { Metric } from 'src/app/model/metric.model';
-import { async } from '@angular/core/testing';
 
 @Component({
     selector: 'app-gallery',
@@ -46,23 +38,19 @@ export class GalleryComponent implements OnInit, OnDestroy {
     /**
      * retrieve all services
      */
-    fetchServices(docName?) {
+    fetchServices() {
         if (this.apiService) {
-            this.sub = this.apiService
-                .getServices(docName)
-                .subscribe(result => {
-                    if (result) {
-                        console.log('services', result);
+            this.sub = this.apiService.getServices().subscribe(result => {
+                if (result) {
+                    console.log('services', result);
 
-                        this.services = result;
-                        this.defaultCallData(this.services[0]);
-                        this.showServiceSpinner = false;
-                    } else {
-                        console.log(
-                            'the data you are tring to access dont exist'
-                        );
-                    }
-                });
+                    this.services = result;
+                    this.defaultCallData(this.services[0]);
+                    this.showServiceSpinner = false;
+                } else {
+                    console.log('the data you are tring to access dont exist');
+                }
+            });
         }
     }
 
@@ -114,6 +102,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     moreContent() {
         console.log('from pagination', this.services[this.services.length - 1]);
-        this.fetchServices(this.services[this.services.length - 1].serviceName);
+        //this.fetchServices(this.services[this.services.length - 1].serviceName);
     }
 }

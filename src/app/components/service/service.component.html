@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <label>{{ service?.serviceName }}</label>
+            <label>{{ service?.serviceName | titlecase }}</label>
         </div>
         <div class="col-12">
             <mat-card (click)="onServiceClicked()" matRipple>

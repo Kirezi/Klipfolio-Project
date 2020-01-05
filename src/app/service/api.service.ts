@@ -15,7 +15,7 @@ import { Metric } from '../model/metric.model';
 export class ApiService {
     constructor(private db: AngularFirestore) {}
 
-    getServices(docName = null) {
+    getServices() {
         let serviceRef;
         try {
             serviceRef = this.db
