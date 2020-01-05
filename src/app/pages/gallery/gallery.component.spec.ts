@@ -20,7 +20,7 @@ class LoadingSpinnerComponent {}
 describe('GalleryComponent', () => {
     let component: GalleryComponent;
     let fixture: ComponentFixture<GalleryComponent>;
-    let service: ApiService;
+    let mockService;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
@@ -30,20 +30,26 @@ describe('GalleryComponent', () => {
                 ModelledDataComponent,
                 LoadingSpinnerComponent
             ],
+            providers: [{ provide: ApiService }],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
     beforeEach(() => {
+        mockService = jasmine.createSpyObj([
+            'getServices',
+            'getModelledData',
+            'getMetricData'
+        ]);
         fixture = TestBed.createComponent(GalleryComponent);
         component = fixture.componentInstance;
-        service = TestBed.get(ApiService);
         fixture.detectChanges();
+        // service = TestBed.get(ApiService);
     });
 
-    it('should create', () => {
+    it('should create gallery page', async(() => {
         expect(component).toBeTruthy();
-    });
+    }));
 
     // it('should use the quoteList from the service', () => {
     //     const apiService = fixture.debugElement.injector.get(ApiService);

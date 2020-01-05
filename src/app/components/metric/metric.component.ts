@@ -24,7 +24,7 @@ export class MetricComponent implements OnInit {
             xAxes: [
                 {
                     ticks: {
-                        display: false //this will remove only the label
+                        display: false // this will remove only the label
                     }
                 }
             ],
@@ -32,7 +32,7 @@ export class MetricComponent implements OnInit {
             yAxes: [
                 {
                     ticks: {
-                        display: false //this will remove only the label
+                        display: false // this will remove only the label
                     }
                 }
             ]
@@ -55,17 +55,22 @@ export class MetricComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        this.indexOfLastElement = this.metric.data.length - 1;
+        if (this.metric) {
+            this.indexOfLastElement = this.metric.data.length - 1;
+        }
+
         this.getChartData();
         this.initChart();
     }
 
     getChartData() {
-        for (let i = 0; i < this.metric.data.length; i++) {
-            this.countArray[i] = this.metric.data[i].count;
-            this.metricDate[i] = moment
-                .utc(this.metric.data[i].updatedAt.seconds * 1000)
-                .format('D MMMM YYYY');
+        if (this.metric) {
+            for (let i = 0; i < this.metric.data.length; i++) {
+                this.countArray[i] = this.metric.data[i].count;
+                this.metricDate[i] = moment
+                    .utc(this.metric.data[i].updatedAt.seconds * 1000)
+                    .format('D MMMM YYYY');
+            }
         }
     }
 

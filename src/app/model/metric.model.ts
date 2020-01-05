@@ -1,9 +1,9 @@
 export interface Metric {
     title: string;
-    data: data[];
+    data?: Data[];
 }
 
-export interface data {
-    count: number;
-    updatedAt: any;
+export interface Data {
+    count?: number;
+    updatedAt?: any;
 }

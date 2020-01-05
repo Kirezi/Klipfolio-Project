@@ -1,18 +1,24 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ɵConsole,
+    OnDestroy,
+    AfterViewInit
+} from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Service } from 'src/app/model/service.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 import { ModelData } from 'src/app/model/modelData.model';
 import { Metric } from 'src/app/model/metric.model';
-import { PaginationService } from 'src/app/service/pagination.service';
+import { async } from '@angular/core/testing';
 
 @Component({
     selector: 'app-gallery',
     templateUrl: './gallery.component.html',
     styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnInit, OnDestroy {
     services: Service[];
     modelData: ModelData[];
     metrics: Metric[];
@@ -32,25 +38,32 @@ export class GalleryComponent implements OnInit {
      * unsubscribe to the api
      */
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
     }
 
     /**
      * retrieve all services
      */
-    fetchServices(docId?) {
-        console.log('fetchservice', docId);
-        this.apiService.getServices(docId).subscribe(result => {
-            if (result) {
-                console.log('services', result);
+    fetchServices(docName?) {
+        if (this.apiService) {
+            this.sub = this.apiService
+                .getServices(docName)
+                .subscribe(result => {
+                    if (result) {
+                        console.log('services', result);
 
-                this.services = result;
-
-                this.showServiceSpinner = false;
-            } else {
-                console.log('the data you are tring to access dont exist');
-            }
-        });
+                        this.services = result;
+                        this.defaultCallData(this.services[0]);
+                        this.showServiceSpinner = false;
+                    } else {
+                        console.log(
+                            'the data you are tring to access dont exist'
+                        );
+                    }
+                });
+        }
     }
 
     /**
@@ -60,14 +73,18 @@ export class GalleryComponent implements OnInit {
      */
     fetchModelledDatas(serviceId: string) {
         this.showModelSpinner = true;
-        this.apiService.getModelledData(serviceId).subscribe(result => {
-            if (result) {
-                this.modelData = result;
-                console.log('modelled data', result);
-                this.showModelSpinner = false;
-            }
-        });
-        console.log(serviceId);
+        if (this.apiService) {
+            this.sub = this.apiService
+                .getModelledData(serviceId)
+                .subscribe(result => {
+                    if (result) {
+                        this.modelData = result;
+                        console.log('modelled data', result);
+                        this.showModelSpinner = false;
+                    }
+                });
+            console.log(serviceId);
+        }
     }
 
     /**
@@ -77,13 +94,22 @@ export class GalleryComponent implements OnInit {
      */
     fetchMetricData(serviceId: string) {
         this.showMetricSpinner = true;
-        this.apiService.getMetricData(serviceId).subscribe(result => {
-            if (result) {
-                this.metrics = result;
-                this.showMetricSpinner = false;
-                console.log('metrics', this.metrics);
-            }
-        });
+        if (this.apiService) {
+            this.sub = this.apiService
+                .getMetricData(serviceId)
+                .subscribe(result => {
+                    if (result) {
+                        this.metrics = result;
+                        this.showMetricSpinner = false;
+                        console.log('metrics', this.metrics);
+                    }
+                });
+        }
+    }
+
+    defaultCallData(service: Service) {
+        this.fetchMetricData(service.id);
+        this.fetchModelledDatas(service.id);
     }
 
     moreContent() {

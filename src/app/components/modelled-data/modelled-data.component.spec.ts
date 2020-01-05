@@ -20,7 +20,7 @@ describe('ModelledDataComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('should create modelled data component', () => {
         expect(component).toBeTruthy();
     });
 });

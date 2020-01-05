@@ -3,7 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import { ApiService } from './service/api.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+    AngularFirestore,
+    AngularFirestoreModule
+} from '@angular/fire/firestore';
 
 @Component({ selector: 'app-header', template: '' })
 class HeaderComponent {}
@@ -14,7 +17,7 @@ class GalleryComponent {}
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule],
+            imports: [RouterTestingModule, AngularFirestoreModule],
             declarations: [AppComponent, HeaderComponent, GalleryComponent],
             providers: [],
             schemas: [NO_ERRORS_SCHEMA]

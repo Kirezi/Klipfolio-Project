@@ -7,7 +7,7 @@ import { Metric } from '../model/metric.model';
  *
  *
  * @export
- * @class ApiService
+ *  ApiService class
  */
 @Injectable({
     providedIn: 'root'
@@ -15,18 +15,21 @@ import { Metric } from '../model/metric.model';
 export class ApiService {
     constructor(private db: AngularFirestore) {}
 
-    getServices(docId = null) {
+    getServices(docName = null) {
         let serviceRef;
-        serviceRef = this.db
-            .collection('service', qfn =>
-                qfn
-                    .orderBy('serviceName')
-                    .startAfter(docId)
-                    .limit(6)
-            )
-            .valueChanges({ idField: 'id' });
-
-        return serviceRef;
+        try {
+            serviceRef = this.db
+                .collection<Service>(
+                    'service',
+                    qfn => qfn.orderBy('serviceName')
+                    // .startAfter(docName)
+                    // .limit(6)
+                )
+                .valueChanges({ idField: 'id' });
+            return serviceRef;
+        } catch (err) {
+            console.log('Erro getting documents', err);
+        }
     }
 
     getModelledData(id: string) {

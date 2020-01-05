@@ -21,7 +21,7 @@ describe('MetricComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('should create metric component', () => {
         expect(component).toBeTruthy();
     });
 });
