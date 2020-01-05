@@ -1,12 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ApiService } from './api.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 describe('ApiService', () => {
-    beforeEach(() => TestBed.configureTestingModule({}));
+    let service: ApiService;
+    beforeEach(() =>
+        TestBed.configureTestingModule({
+            providers: [ApiService, { provide: AngularFirestore }]
+        })
+    );
 
     it('should be created', () => {
-        const service: ApiService = TestBed.get(ApiService);
+        service = TestBed.get(ApiService);
         expect(service).toBeTruthy();
     });
 });

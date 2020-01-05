@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MetricComponent } from './metric.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ChartsModule } from 'ng2-charts';
 
 describe('MetricComponent', () => {
     let component: MetricComponent;
@@ -8,6 +10,7 @@ describe('MetricComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [SharedModule, ChartsModule],
             declarations: [MetricComponent]
         }).compileComponents();
     }));

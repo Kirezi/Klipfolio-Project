@@ -21,10 +21,7 @@ export class GalleryComponent implements OnInit {
     showServiceSpinner: boolean;
     showMetricSpinner: boolean;
     showModelSpinner: boolean;
-    constructor(
-        private apiService: ApiService,
-        private paginationService: PaginationService
-    ) {}
+    constructor(private apiService: ApiService) {}
 
     ngOnInit() {
         this.showServiceSpinner = true;

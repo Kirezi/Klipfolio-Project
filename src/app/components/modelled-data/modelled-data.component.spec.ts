@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModelledDataComponent } from './modelled-data.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ModelledDataComponent', () => {
     let component: ModelledDataComponent;
@@ -8,6 +9,7 @@ describe('ModelledDataComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [SharedModule],
             declarations: [ModelledDataComponent]
         }).compileComponents();
     }));
