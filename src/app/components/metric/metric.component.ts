@@ -71,6 +71,8 @@ export class MetricComponent implements OnInit {
                     .utc(this.metric.data[i].updatedAt.seconds * 1000)
                     .format('D MMMM YYYY');
             }
+        } else {
+            console.log('metric does not exist');
         }
     }
 
