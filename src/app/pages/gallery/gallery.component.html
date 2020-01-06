@@ -3,7 +3,10 @@
     <div class="col-12">
       <h6>Recommended Metrics</h6>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="showModelSpinner">
+      <loading-spinner></loading-spinner>
+    </div>
+    <div class="col-12" *ngIf="!showModelSpinner">
       <div class="row">
         <div class="col-12 alert alert-info" role="alert" *ngIf="metrics?.length===0">
           No metrics exist

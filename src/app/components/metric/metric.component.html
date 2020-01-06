@@ -1,7 +1,7 @@
 <mat-card *ngIf="metric">
   <mat-card-content>
     <h6 class="m-0">
-      <label class="m-0">{{ metric?.title}}</label>
+      <label class="m-0">{{ metric?.title | titlecase }}</label>
     </h6>
     <div class="flex-row-reverse m-0">
       <label class="percentage m-0 mr-5">
@@ -15,7 +15,8 @@
     <div class="flex-container">
       <div class="mr-4">
         <strong><sup>$</sup>
-          {{ (metric?.data)[indexOfLastElement].count }}</strong>
+          <span id="countLabel">{{ (metric?.data)[indexOfLastElement]?.count }}</span>
+        </strong>
       </div>
 
       <div class="flex-column">

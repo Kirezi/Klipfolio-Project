@@ -15,18 +15,12 @@ import { Observable } from 'rxjs';
     templateUrl: './service.component.html',
     styleUrls: ['./service.component.scss']
 })
-export class ServiceComponent implements OnInit, OnChanges {
+export class ServiceComponent implements OnInit {
     @Input() service: Service;
     @Output() serviceClicked = new EventEmitter();
-    showSpinner: boolean;
-
     constructor() {}
-    ngOnChanges() {
-        this.showSpinner = true;
-    }
-    ngOnInit() {
-        this.showSpinner = false;
-    }
+
+    ngOnInit() {}
 
     onServiceClicked() {
         this.serviceClicked.emit(this.service.id);

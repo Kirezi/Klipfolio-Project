@@ -65,4 +65,20 @@ describe('ServiceComponent', () => {
             'youtubelogo'
         );
     }));
+
+    it('should emit onServiceClicked', async(() => {
+        fixture.componentInstance.service = {
+            id: 'service1',
+            serviceName: 'youtube',
+            // tslint:disable-next-line: max-line-length
+            imageUrl: imageTest
+        };
+        spyOn(component.serviceClicked, 'emit');
+        fixture.nativeElement
+            .querySelector('mat-card')
+            .dispatchEvent(new Event('click'));
+
+        fixture.detectChanges();
+        expect(component.serviceClicked.emit).toHaveBeenCalledWith('service1');
+    }));
 });

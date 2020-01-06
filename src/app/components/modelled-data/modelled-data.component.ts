@@ -9,7 +9,5 @@ export class ModelledDataComponent implements OnInit {
     @Input() title: string;
     constructor() {}
 
-    ngOnInit() {
-        console.log(this.title);
-    }
+    ngOnInit() {}
 }

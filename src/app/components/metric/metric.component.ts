@@ -58,15 +58,15 @@ export class MetricComponent implements OnInit {
         if (this.metric) {
             this.indexOfLastElement = this.metric.data.length - 1;
         }
-
         this.getChartData();
         this.initChart();
     }
 
     getChartData() {
-        if (this.metric) {
+        if (this.metric && this.metric.data) {
             for (let i = 0; i < this.metric.data.length; i++) {
                 this.countArray[i] = this.metric.data[i].count;
+
                 this.metricDate[i] = moment
                     .utc(this.metric.data[i].updatedAt.seconds * 1000)
                     .format('D MMMM YYYY');
