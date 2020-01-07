@@ -123,13 +123,4 @@ export class GalleryComponent implements OnInit, OnDestroy {
         this.fetchMetricData(serviceId);
         this.fetchModelledDatas(serviceId);
     }
-
-    // the following section is for adding the service
-    // createService(service: Service) {
-    //     if (service.imageUrl && service.serviceName) {
-    //         this.apiService.setServiceData(service);
-    //     } else {
-    //         console.log('one of the properties is missing from the service');
-    //     }
-    // }
 }
