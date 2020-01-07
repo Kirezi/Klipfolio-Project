@@ -29,17 +29,17 @@ describe('ServiceComponent', () => {
     });
 
     it('should have the correct service object', () => {
-        fixture.componentInstance.service = {
+        component.service = {
             id: 'service1',
             serviceName: 'youtube',
             // tslint:disable-next-line: max-line-length
             imageUrl: imageTest
         };
-        expect(fixture.componentInstance.service).toBeDefined();
+        expect(component.service).toBeDefined();
     });
 
     it('should render the service name in the label tag ', async(() => {
-        fixture.componentInstance.service = {
+        component.service = {
             id: 'service1',
             serviceName: 'youtube',
             // tslint:disable-next-line: max-line-length
@@ -53,7 +53,7 @@ describe('ServiceComponent', () => {
     }));
 
     it('should render the image  in the img tag ', async(() => {
-        fixture.componentInstance.service = {
+        component.service = {
             id: 'service1',
             serviceName: 'youtube',
             imageUrl: 'youtubelogo'
@@ -67,10 +67,9 @@ describe('ServiceComponent', () => {
     }));
 
     it('should emit onServiceClicked', async(() => {
-        fixture.componentInstance.service = {
+        component.service = {
             id: 'service1',
             serviceName: 'youtube',
-            // tslint:disable-next-line: max-line-length
             imageUrl: imageTest
         };
         spyOn(component.serviceClicked, 'emit');

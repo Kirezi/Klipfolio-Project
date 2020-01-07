@@ -138,12 +138,4 @@ describe('MetricComponent', () => {
     it('should check existence of metric data', () => {
         expect(component.metric.data).toBeTruthy();
     });
-
-    // it('metric does not exit', () => {
-    //     component.metric = null;
-    //     console.log = jasmine.createSpy('log');
-    //     spyOn(component, 'getChartData').and.callThrough();
-    //     component.getChartData();
-    //     expect(console.log).toEqual('metric does not exist');
-    // });
 });

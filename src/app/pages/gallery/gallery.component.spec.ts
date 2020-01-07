@@ -4,7 +4,7 @@ import { GalleryComponent } from './gallery.component';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Service } from 'src/app/model/service.model';
-import { of } from 'rxjs';
+import { of, throwError, Subscription } from 'rxjs';
 import { ModelData } from 'src/app/model/modelData.model';
 import { Metric } from 'src/app/model/metric.model';
 import { By } from '@angular/platform-browser';
@@ -158,10 +158,49 @@ describe('GalleryComponent', () => {
         expect(component.errorMetricMessage).toContain('NO METRIC EXIST');
     });
 
-    // it('should return an error if getMetric return', () => {
-    //     mockApiService.getMetricData.and.returnValue(of(undefined));
-    //     component.ngOnInit();
-    //     spyOn(component, 'fetchMetricData').and.callThrough();
-    //     expect(component.errorMetricMessage).toContain('crazy');
-    // });
+    it('should return an error if getServices return an error', () => {
+        let error = 'Fake error';
+        mockApiService.getServices.and.callFake(() => {
+            return throwError(new Error(error));
+        });
+        component.ngOnInit();
+        spyOn(component, 'fetchMetricData').and.callThrough();
+        expect(component.errorServiceMessage).toContain(
+            'Something went wrong: Error: ' + error
+        );
+        expect(component.showServiceSpinner).toBeFalsy();
+    });
+
+    it('should return an error if getModelledData return an error', () => {
+        let error = 'Fake error';
+        mockApiService.getModelledData.and.callFake(() => {
+            return throwError(new Error(error));
+        });
+        component.ngOnInit();
+        spyOn(component, 'fetchMetricData').and.callThrough();
+        expect(component.errorModelMessage).toContain(
+            'Something went wrong: Error: ' + error
+        );
+        expect(component.showModelSpinner).toBeFalsy();
+    });
+
+    it('should return an error if getMetric return an error', () => {
+        let error = 'Fake error';
+        mockApiService.getMetricData.and.callFake(() => {
+            return throwError(new Error(error));
+        });
+        component.ngOnInit();
+        spyOn(component, 'fetchMetricData').and.callThrough();
+        expect(component.errorMetricMessage).toContain(
+            'Something went wrong: Error: ' + error
+        );
+        expect(component.showMetricSpinner).toBeFalsy();
+    });
+
+    it('should unsuscribe up ondestroy', () => {
+        spyOn(component.sub, 'unsubscribe');
+        component.ngOnDestroy();
+        expect(component.sub).toBeDefined();
+        expect(component.sub.unsubscribe).toHaveBeenCalled();
+    });
 });

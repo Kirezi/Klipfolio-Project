@@ -26,12 +26,12 @@ describe('ModelledDataComponent', () => {
     });
 
     it('should have the title of the model defined', () => {
-        fixture.componentInstance.title = 'subscription model';
+        component.title = 'subscription model';
         expect(fixture.componentInstance.title).toBeDefined();
     });
 
     it('should render the title in the label tags in mat card ', () => {
-        fixture.componentInstance.title = 'subscription model';
+        component.title = 'subscription model';
         fixture.detectChanges();
         let de = fixture.debugElement.query(
             By.css('.container>mat-card>label')

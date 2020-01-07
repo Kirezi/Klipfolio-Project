@@ -15,7 +15,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     modelData: ModelData[];
     metrics: Metric[];
     sub: Subscription;
-    servicePageSize = 6;
+    servicePageSize = 6; // to be used for pagination later
     showServiceSpinner: boolean;
     showMetricSpinner: boolean;
     showModelSpinner: boolean;
@@ -46,7 +46,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
             result => {
                 if (result) {
                     console.log('services', result);
-
                     this.services = result;
                     this.defaultCallData(this.services[0].id);
                     this.showServiceSpinner = false;
@@ -58,7 +57,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
             },
             error => {
                 this.showServiceSpinner = false;
-                this.errorServiceMessage = 'Something went wrong' + error;
+                this.errorServiceMessage = 'Something went wrong: ' + error;
                 console.log(this.errorServiceMessage);
             }
         );
@@ -84,7 +83,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
             },
             error => {
                 this.showModelSpinner = false;
-                this.errorModelMessage = 'something went wrong' + error;
+                this.errorModelMessage = 'Something went wrong: ' + error;
             }
         );
     }
@@ -110,7 +109,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
             },
             error => {
                 this.showMetricSpinner = false;
-                this.errorMetricMessage = 'something went wrong' + error;
+                this.errorMetricMessage = 'Something went wrong: ' + error;
             }
         );
     }

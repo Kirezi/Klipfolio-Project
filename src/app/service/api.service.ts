@@ -22,7 +22,7 @@ export class ApiService {
                 .collection<Service>(
                     'service',
                     qfn => qfn.orderBy('serviceName')
-                    // .startAfter(docName)
+                    // .startAfter(docName) for pagination purpose
                     // .limit(6)
                 )
                 .valueChanges({ idField: 'id' });

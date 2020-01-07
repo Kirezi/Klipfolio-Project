@@ -27,14 +27,12 @@ describe('ApiService', () => {
     });
 
     it('should call getService and return  at least a service', (done: DoneFn) => {
-        // inject([ApiService], apiService => {
         let response = null;
         apiService.getServices().subscribe(result => {
             response = result;
             expect(response.length).toBeGreaterThan(0);
             done();
         });
-        //})();
     });
 
     it('should call getModelledData and return  at least model', (done: DoneFn) => {
@@ -66,17 +64,15 @@ describe('ApiService', () => {
         });
     });
 
-    // it('should  catch error for getMetricData() with an empty id', (done: DoneFn) => {
-    //     const id = '';
-    //     let service = apiService.getMetricData(id);
-    //     expect(service).toBeUndefined();
-    //     done();
-    // });
+    it('should  catch error for getMetricData() with undefined data', () => {
+        const id = undefined;
+        let service = apiService.getMetricData(id);
+        expect(service).toBeUndefined();
+    });
 
-    // it('should  catch error for getModelledData() with an empty id', (done: DoneFn) => {
-    //     const id = '';
-    //     let service = apiService.getModelledData(id);
-    //     expect(service).toBeUndefined();
-    //     done();
-    // });
+    it('should  catch error for getModelledData() with undefined data', () => {
+        const id = '';
+        let service = apiService.getModelledData(undefined);
+        expect(service).toBeUndefined();
+    });
 });
