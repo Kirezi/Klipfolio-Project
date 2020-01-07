@@ -26,40 +26,30 @@ describe('ApiService', () => {
         expect(apiService).toBeTruthy();
     });
 
-    it('should call getService and return  at least a service', (done: DoneFn) => {
+    it('should call getService and return  at least a service', () => {
         let response = null;
         apiService.getServices().subscribe(result => {
             response = result;
             expect(response.length).toBeGreaterThan(0);
-            done();
         });
     });
 
-    it('should call getModelledData and return  at least model', (done: DoneFn) => {
+    it('should call getModelledData and return  at least model', () => {
         let response = null;
         const id = 'qomGvAzU3Hpto0YCiBoG';
-        apiService.getModelledData(id).subscribe(
-            result => {
-                response = result;
-                expect(response.length).toBeGreaterThan(0);
-                done();
-            },
-            error => {
-                expect(error).toContain(
-                    'Error getting Modelled Data documents'
-                );
-            }
-        );
+        apiService.getModelledData(id).subscribe(result => {
+            response = result;
+            expect(response.length).toBeGreaterThan(0);
+        });
     });
 
-    it('should call getMetricData and return  at least model', (done: DoneFn) => {
+    it('should call getMetricData and return  at least model', () => {
         let response = null;
         const id = 'qomGvAzU3Hpto0YCiBoG';
         apiService.getMetricData(id).subscribe(result => {
             if (result) {
                 response = result;
                 expect(response.length).toBeGreaterThan(0);
-                done();
             }
         });
     });
