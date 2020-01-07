@@ -15,6 +15,9 @@ import { Metric } from '../model/metric.model';
 export class ApiService {
     constructor(private db: AngularFirestore) {}
 
+    /**
+     * retrieve all the services
+     */
     getServices() {
         let serviceRef;
         try {
@@ -32,6 +35,12 @@ export class ApiService {
         }
     }
 
+    /**
+     *
+     * retrieve all the modelled data
+     * that belong to a service
+     * @param id
+     */
     getModelledData(id: string) {
         try {
             return this.db
@@ -44,6 +53,12 @@ export class ApiService {
         }
     }
 
+    /**
+     *
+     * retrieve all metrics that
+     * belong to a service
+     * @param id
+     */
     getMetricData(id: string) {
         try {
             return this.db
