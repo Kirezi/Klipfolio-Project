@@ -109,33 +109,59 @@ describe('GalleryComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should set services correctly from the apiservice', () => {
-        expect(fixture.componentInstance.services.length).toEqual(3);
-    });
-
-    it('should set modelleddatas  correctly from the apiservice', () => {
-        expect(fixture.componentInstance.modelData.length).toEqual(2);
-    });
-
-    it('should set metrics correctly from the apiservice', () => {
-        expect(fixture.componentInstance.metrics.length).toEqual(1);
-    });
-
-    it('should create a service component for each service obj coming from Api', () => {
+    it('should  call fetchServices() and have the exact services component created', () => {
+        spyOn(component, 'fetchServices').and.callThrough();
+        expect(component.services.length).toEqual(services.length);
         expect(
             fixture.debugElement.queryAll(By.css('app-service')).length
         ).toBe(fixture.componentInstance.services.length);
     });
 
-    it('should create a metric component for each metric obj coming from Api', () => {
+    it('should call fetchModelledDatas() and have the exact modelled-data component created', () => {
+        spyOn(component, 'fetchModelledDatas').and.callThrough();
+        expect(component.modelData.length).toEqual(2);
+        expect(
+            fixture.debugElement.queryAll(By.css('app-modelled-data')).length
+        ).toBe(fixture.componentInstance.modelData.length);
+    });
+
+    it('should call fetchMetricData() and have the exact metric component', () => {
+        spyOn(component, 'fetchMetricData').and.callThrough();
+        expect(component.metrics.length).toEqual(1);
         expect(fixture.debugElement.queryAll(By.css('app-metric')).length).toBe(
             fixture.componentInstance.metrics.length
         );
     });
 
-    it('should create a modelled data component for each modelled data obj coming from Api', () => {
-        expect(
-            fixture.debugElement.queryAll(By.css('app-modelled-data')).length
-        ).toBe(fixture.componentInstance.modelData.length);
+    it('should return a No Service Exist if Api return null', () => {
+        let message = 'No SERVICE EXIST';
+        mockApiService.getServices.and.returnValue(of(null));
+        component.ngOnInit();
+        spyOn(component, 'fetchServices').and.callThrough();
+        expect(component.errorServiceMessage).toContain(message);
+        fixture.detectChanges();
     });
+
+    it('should return a No Modelled Exist if Api return null', () => {
+        let message = 'NO MODELLED DATA EXIST';
+        mockApiService.getModelledData.and.returnValue(of(null));
+        component.ngOnInit();
+        spyOn(component, 'fetchModelledDatas').and.callThrough();
+        expect(component.errorModelMessage).toContain(message);
+        fixture.detectChanges();
+    });
+
+    it('should return a No Metric Exist if Api return null', () => {
+        mockApiService.getMetricData.and.returnValue(of(null));
+        component.ngOnInit();
+        spyOn(component, 'fetchMetricData').and.callThrough();
+        expect(component.errorMetricMessage).toContain('NO METRIC EXIST');
+    });
+
+    // it('should return an error if getMetric return', () => {
+    //     mockApiService.getMetricData.and.returnValue(of(undefined));
+    //     component.ngOnInit();
+    //     spyOn(component, 'fetchMetricData').and.callThrough();
+    //     expect(component.errorMetricMessage).toContain('crazy');
+    // });
 });

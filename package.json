@@ -7,7 +7,8 @@
         "build": "ng build",
         "test": "ng test --source-map=false",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "bundle-report": "ng build --stats-json && webpack-bundle-analyzer dist/stats.json"
     },
     "private": true,
     "dependencies": {
@@ -62,7 +63,8 @@
         "ts-node": "~7.0.0",
         "tslint": "~5.15.0",
         "tslint-config-prettier": "^1.18.0",
-        "typescript": "~3.5.3"
+        "typescript": "~3.5.3",
+        "webpack-bundle-analyzer": "^3.6.0"
     },
     "husky": {
         "hooks": {

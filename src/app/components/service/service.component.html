@@ -4,10 +4,12 @@
       <label>{{ service?.serviceName | titlecase }}</label>
     </div>
     <div class="col-12">
-      <mat-card (click)="onServiceClicked()" matRipple>
+      <a>
+        <mat-card (click)="onServiceClicked()" matRipple>
 
-        <img [src]="service?.imageUrl" class="img-fluid" />
-      </mat-card>
+          <img [src]="service?.imageUrl" class="img-fluid" />
+        </mat-card>
+      </a>
     </div>
   </div>
 </div>

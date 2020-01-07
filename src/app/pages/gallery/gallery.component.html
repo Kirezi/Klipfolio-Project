@@ -8,8 +8,11 @@
     </div>
     <div class="col-12" *ngIf="!showModelSpinner">
       <div class="row">
+        <div class="col-12 alert alert-danger" role="alert" *ngIf="errorMetricMessage" id="#errorMetric">
+          {{errorMetricMessage}}
+        </div>
         <div class="col-12 alert alert-info" role="alert" *ngIf="metrics?.length===0">
-          No metrics exist
+          No metric for the current service
         </div>
         <div class="col-sm-12  col-md-3 mb-4 " *ngFor="let metric of metrics">
           <app-metric [metric]="metric"></app-metric>
@@ -26,21 +29,19 @@
       <div class="centerblock text-center">
         <loading-spinner class="text-center"></loading-spinner>
       </div>
-
     </div>
     <div class="col-12" *ngIf="!showServiceSpinner">
       <div class="row">
+        <div class="col-12 alert alert-danger" id="#errorService" role="alert" *ngIf="errorServiceMessage">
+          {{errorServiceMessage}}
+        </div>
+        <div class="col-12 alert alert-info" role="alert" *ngIf="services?.length===0">
+          currently the list of service is empty, please add list to your service
+        </div>
         <div class="col-sm-12 col-md-2 mb-4" *ngFor="let service of services">
           <app-service [service]="service" (serviceClicked)="fetchModelledDatas($event)"
             (serviceClicked)="fetchMetricData($event)"></app-service>
         </div>
-      </div>
-      <div class="row container">
-        <div class="col-12">
-          <button mat-stroked-button color="primary" class="float-right" (click)="moreContent()">More
-            services</button>
-        </div>
-
       </div>
     </div>
   </div>
@@ -54,8 +55,11 @@
     </div>
     <div class="col-12" *ngIf="!showModelSpinner">
       <div class="row">
+        <div class="col-12 alert alert-danger" role="alert" *ngIf="errorModelMessage">
+          <span id="#errorModel">{{errorModelMessage}}</span>
+        </div>
         <div class="col-12 alert alert-info" role="alert" *ngIf="modelData?.length===0">
-          No modeled Data exist
+          No modeled Data for the current service
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-3" *ngFor="let data of modelData">
           <app-modelled-data [title]="data.title"></app-modelled-data>

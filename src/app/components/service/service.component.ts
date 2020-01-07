@@ -22,6 +22,9 @@ export class ServiceComponent implements OnInit {
 
     ngOnInit() {}
 
+    /**
+     * provide the service id to the parrent component
+     */
     onServiceClicked() {
         this.serviceClicked.emit(this.service.id);
     }

@@ -19,6 +19,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
     showServiceSpinner: boolean;
     showMetricSpinner: boolean;
     showModelSpinner: boolean;
+    errorServiceMessage: string;
+    errorModelMessage: string;
+    errorMetricMessage: string;
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
@@ -39,19 +42,26 @@ export class GalleryComponent implements OnInit, OnDestroy {
      * retrieve all services
      */
     fetchServices() {
-        if (this.apiService) {
-            this.sub = this.apiService.getServices().subscribe(result => {
+        this.sub = this.apiService.getServices().subscribe(
+            result => {
                 if (result) {
                     console.log('services', result);
 
                     this.services = result;
-                    this.defaultCallData(this.services[0]);
+                    this.defaultCallData(this.services[0].id);
                     this.showServiceSpinner = false;
                 } else {
-                    console.log('the data you are tring to access dont exist');
+                    this.showServiceSpinner = false;
+                    this.errorServiceMessage = 'No SERVICE EXIST';
+                    console.log(this.errorServiceMessage);
                 }
-            });
-        }
+            },
+            error => {
+                this.showServiceSpinner = false;
+                this.errorServiceMessage = 'Something went wrong' + error;
+                console.log(this.errorServiceMessage);
+            }
+        );
     }
 
     /**
@@ -61,18 +71,22 @@ export class GalleryComponent implements OnInit, OnDestroy {
      */
     fetchModelledDatas(serviceId: string) {
         this.showModelSpinner = true;
-        if (this.apiService) {
-            this.sub = this.apiService
-                .getModelledData(serviceId)
-                .subscribe(result => {
-                    if (result) {
-                        this.modelData = result;
-                        console.log('modelled data', result);
-                        this.showModelSpinner = false;
-                    }
-                });
-            console.log(serviceId);
-        }
+        this.sub = this.apiService.getModelledData(serviceId).subscribe(
+            result => {
+                if (result) {
+                    this.modelData = result;
+                    console.log('modelled data', result);
+                    this.showModelSpinner = false;
+                } else {
+                    this.errorModelMessage = 'NO MODELLED DATA EXIST';
+                    this.showModelSpinner = false;
+                }
+            },
+            error => {
+                this.showModelSpinner = false;
+                this.errorModelMessage = 'something went wrong' + error;
+            }
+        );
     }
 
     /**
@@ -82,26 +96,41 @@ export class GalleryComponent implements OnInit, OnDestroy {
      */
     fetchMetricData(serviceId: string) {
         this.showMetricSpinner = true;
-        if (this.apiService) {
-            this.sub = this.apiService
-                .getMetricData(serviceId)
-                .subscribe(result => {
-                    if (result) {
-                        this.metrics = result;
-                        this.showMetricSpinner = false;
-                        console.log('metrics', this.metrics);
-                    }
-                });
-        }
+
+        this.sub = this.apiService.getMetricData(serviceId).subscribe(
+            result => {
+                if (result) {
+                    this.metrics = result;
+                    this.showMetricSpinner = false;
+                    console.log('metrics', this.metrics);
+                } else {
+                    this.showMetricSpinner = false;
+                    this.errorMetricMessage = 'NO METRIC EXIST';
+                }
+            },
+            error => {
+                this.showMetricSpinner = false;
+                this.errorMetricMessage = 'something went wrong' + error;
+            }
+        );
     }
 
-    defaultCallData(service: Service) {
-        this.fetchMetricData(service.id);
-        this.fetchModelledDatas(service.id);
+    /**
+     * retrieve metric and modelled data
+     * by the 1st service
+     * @param serviceId
+     */
+    defaultCallData(serviceId: string) {
+        this.fetchMetricData(serviceId);
+        this.fetchModelledDatas(serviceId);
     }
 
-    moreContent() {
-        console.log('from pagination', this.services[this.services.length - 1]);
-        //this.fetchServices(this.services[this.services.length - 1].serviceName);
-    }
+    // the following section is for adding the service
+    // createService(service: Service) {
+    //     if (service.imageUrl && service.serviceName) {
+    //         this.apiService.setServiceData(service);
+    //     } else {
+    //         console.log('one of the properties is missing from the service');
+    //     }
+    // }
 }

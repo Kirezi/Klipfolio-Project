@@ -28,23 +28,74 @@ export class ApiService {
                 .valueChanges({ idField: 'id' });
             return serviceRef;
         } catch (err) {
-            console.log('Erro getting documents', err);
+            console.log('Error getting service documents', err);
         }
     }
 
     getModelledData(id: string) {
-        return this.db
-            .collection('modelled-data')
-            .doc(id)
-            .collection<ModelData>('data')
-            .valueChanges();
+        try {
+            return this.db
+                .collection('modelled-data')
+                .doc(id)
+                .collection<ModelData>('data', qfn => qfn.orderBy('title'))
+                .valueChanges();
+        } catch (err) {
+            console.log('Error getting Modelled Data documents', err);
+        }
     }
 
     getMetricData(id: string) {
-        return this.db
-            .collection('metric')
-            .doc(id)
-            .collection<Metric>('metricData')
-            .valueChanges();
+        try {
+            return this.db
+                .collection('metric')
+                .doc(id)
+                .collection<Metric>('metricData', qfn => qfn.orderBy('title'))
+                .valueChanges();
+        } catch (err) {
+            console.log('Error getting Metric Data documents', err);
+        }
     }
+
+    // /**
+    //  * post service on the db
+    //  * @param service
+    //  */
+    // setServiceData(service: Service) {
+    //     if (service.serviceName && service.imageUrl) {
+    //         this.db
+    //             .collection('service')
+    //             .add(service)
+    //             .catch(error => {
+    //                 console.log('Error adding service document:', error);
+    //             });
+    //     } else {
+    //         console.log('Please insert the right data');
+    //     }
+    // }
+
+    // /**
+    //  * post metric data
+    //  * @param serviceId
+    //  * @param metric
+    //  */
+    // setMetricData(serviceId: string, metric: Metric) {
+    //     this.db
+    //         .collection('metric')
+    //         .doc(serviceId)
+    //         .collection('metricData')
+    //         .add(metric);
+    // }
+
+    // /**
+    //  * Post Modelled Data
+    //  * @param serviceId
+    //  * @param modelData
+    //  */
+    // setModelledData(serviceId: string, modelData: ModelData) {
+    //     this.db
+    //         .collection('modelledData')
+    //         .doc(serviceId)
+    //         .collection('data')
+    //         .add(modelData);
+    // }
 }

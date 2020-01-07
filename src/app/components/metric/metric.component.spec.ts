@@ -66,32 +66,32 @@ describe('MetricComponent', () => {
         expect(component.metric).toBeDefined();
     });
 
-    // it('should get the exact last index', async(() => {
-    //     component.metric = {
-    //         title: 'subscription',
-    //         data: [
-    //             {
-    //                 count: 200,
-    //                 updatedAt: {
-    //                     seconds: 1577805000
-    //                 }
-    //             },
+    it('should get the exact last index', () => {
+        component.metric = {
+            title: 'subscription',
+            data: [
+                {
+                    count: 200,
+                    updatedAt: {
+                        seconds: 1577805000
+                    }
+                },
 
-    //             {
-    //                 count: 500,
-    //                 updatedAt: {
-    //                     seconds: 1577869200
-    //                 }
-    //             }
-    //         ]
-    //     };
+                {
+                    count: 500,
+                    updatedAt: {
+                        seconds: 1577869200
+                    }
+                }
+            ]
+        };
+        component.ngOnInit();
+        expect(component.indexOfLastElement).toEqual(
+            component.metric.data.length - 1
+        );
+    });
 
-    //     expect(component.indexOfLastElement).toEqual(
-    //         component.metric.data.length - 1
-    //     );
-    // }));
-
-    it('should render the metric title name in the label tag ', async(() => {
+    it('should render the metric title name in the label tag ', () => {
         component.metric = {
             title: 'subscription',
             data: [
@@ -117,16 +117,16 @@ describe('MetricComponent', () => {
                 .querySelector('label')
                 .textContent.toLowerCase()
         ).toContain('subscription');
-    }));
+    });
 
-    // it('should render the metric count  in the span tag ', () => {
-    //     console.log('checking', component.indexOfLastElement);
-    //     fixture.detectChanges();
+    it('should render the metric count  in the span tag ', () => {
+        component.ngOnInit();
+        fixture.detectChanges();
 
-    //     expect(
-    //         fixture.nativeElement.querySelector('#countLabel').textContent
-    //     ).toContain(component.metric.data[1].count);
-    // });
+        expect(
+            fixture.nativeElement.querySelector('#countLabel').textContent
+        ).toContain(component.metric.data[1].count);
+    });
 
     it('should call getchartData()', () => {
         spyOn(component, 'getChartData').and.callThrough();

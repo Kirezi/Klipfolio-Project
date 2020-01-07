@@ -61,7 +61,11 @@ export class MetricComponent implements OnInit {
         this.getChartData();
         this.initChart();
     }
-
+    /**
+     * retrieve data and
+     * break them into two array
+     * representing two axis
+     */
     getChartData() {
         if (this.metric && this.metric.data) {
             for (let i = 0; i < this.metric.data.length; i++) {
@@ -76,6 +80,11 @@ export class MetricComponent implements OnInit {
         }
     }
 
+    /**
+     * initialize our chart with
+     * the array provided by
+     * getchartData
+     */
     initChart() {
         this.lineChartData = [{ data: this.countArray, label: 'metric' }];
         this.lineChartLabels = this.metricDate;
